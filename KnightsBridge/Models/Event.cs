@@ -8,7 +8,7 @@ namespace KnightsBridge.Models
 {
     public class Event
     {
-        public int Id { get; set; }
+        public int EventId { get; set; }
 
         [Required]
         public string Title { get; set; }
