@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using KnightsBridge.Areas.Identity.Data;
 using KnightsBridge.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -27,8 +28,8 @@ namespace KnightsBridge
         {
             services.AddDbContext<KnightsBridgeContext>(options =>
                 options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                    Configuration.GetConnectionString("KnightsBridgeContextConnection")));
+            services.AddDefaultIdentity<KnightsBridgeUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<KnightsBridgeContext>();
             services.AddControllersWithViews();
             services.AddRazorPages();

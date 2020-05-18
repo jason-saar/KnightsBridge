@@ -16,12 +16,12 @@ namespace KnightsBridge.Areas.Identity
         public void Configure(IWebHostBuilder builder)
         {
             builder.ConfigureServices((context, services) => {
-                services.AddDbContext<KnightsBridgeContext>(options =>
-                    options.UseSqlServer(
-                        context.Configuration.GetConnectionString("KnightsBridgeContextConnection")));
+                //services.AddDbContext<KnightsBridgeContext>(options =>
+                //    options.UseSqlServer(
+                //        context.Configuration.GetConnectionString("KnightsBridgeContextConnection")));
 
-                services.AddDefaultIdentity<KnightsBridgeUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                    .AddEntityFrameworkStores<KnightsBridgeContext>();
+                //services.AddDefaultIdentity<KnightsBridgeUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                //    .AddEntityFrameworkStores<KnightsBridgeContext>();
             });
         }
     }
