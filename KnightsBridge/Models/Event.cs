@@ -18,5 +18,7 @@ namespace KnightsBridge.Models
 
         [Required]
         public string Location { get; set; }
+
+        public string Description { get; set; }
     }
 }
