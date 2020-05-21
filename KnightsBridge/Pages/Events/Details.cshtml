@@ -1,5 +1,5 @@
 ﻿@page
-@model KnightsBridge.Pages.Events.Events.DetailsModel
+@model KnightsBridge.Pages.Events.DetailsModel
 
 @{
     ViewData["Title"] = "Details";
@@ -19,16 +19,28 @@
             @Html.DisplayFor(model => model.Event.Title)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Event.Date)
+            @Html.DisplayNameFor(model => model.Event.Description)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Event.Date)
+            @Html.DisplayFor(model => model.Event.Description)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Event.Location)
+            @Html.DisplayNameFor(model => model.Event.Start)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Event.Location)
+            @Html.DisplayFor(model => model.Event.Start)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Event.End)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Event.End)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Event.AllDay)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Event.AllDay)
         </dd>
     </dl>
 </div>

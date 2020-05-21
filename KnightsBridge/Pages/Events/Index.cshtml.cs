@@ -6,8 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using KnightsBridge.Models;
+using System.Text.Json;
 
-namespace KnightsBridge.Pages.Events.Events
+namespace KnightsBridge.Pages.Events
 {
     public class IndexModel : PageModel
     {
@@ -18,24 +19,25 @@ namespace KnightsBridge.Pages.Events.Events
             _context = context;
         }
 
+        public IActionResult OnGetFindAllEvents()
+        {
+            var events = _context.Events.Select(x => new
+            {
+                id = x.EventId,
+                title = x.Title,
+                description = x.Description,
+                start = x.Start,
+                end = x.End,
+                allDay = false
+            }).ToList();
+            return new JsonResult(events);
+        }
+
         public IList<Event> Event { get;set; }
 
         public async Task OnGetAsync()
         {
             Event = await _context.Events.ToListAsync();
-        }
-
-        public IActionResult OnGetFindAllEvents()
-        {
-            var events = _context.Events.Select(e => new
-            {
-                eventId = e.EventId,
-                title = e.Title,
-                location = e.Location,
-                date = e.Date.ToString("MM/dd/yyyy"),
-                description = e.Description
-            }).ToList();
-            return new JsonResult(events);
         }
     }
 }

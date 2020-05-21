@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using KnightsBridge.Data;
 using KnightsBridge.Models;
 
-namespace KnightsBridge.Pages.Events.Events
+namespace KnightsBridge.Pages.Events
 {
     public class CreateModel : PageModel
     {
