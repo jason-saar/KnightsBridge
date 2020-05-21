@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -33,6 +35,13 @@ namespace KnightsBridge
                 .AddEntityFrameworkStores<KnightsBridgeContext>();
             services.AddControllersWithViews();
             services.AddRazorPages();
+
+            services.Add(
+            new ServiceDescriptor(
+                    typeof(IActionResultExecutor<JsonResult>),
+                    Type.GetType("Microsoft.AspNetCore.Mvc.Infrastructure.SystemTextJsonResultExecutor, Microsoft.AspNetCore.Mvc.Core"),
+                    ServiceLifetime.Singleton)
+            );
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

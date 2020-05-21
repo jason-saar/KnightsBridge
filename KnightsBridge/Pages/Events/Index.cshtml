@@ -1,12 +1,44 @@
 ﻿@page
-@model KnightsBridge.Pages.Events.Events.IndexModel
+@model KnightsBridge.Pages.Events.IndexModel
 
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+
+    <head>
+        <link href='~/lib/fullcalendar/core/main.css' rel='stylesheet' />
+        <link href='~/lib/fullcalendar/daygrid/main.css' rel='stylesheet' />
+        <script src="~/lib/fullcalendar/core/main.js"></script>
+        <script src="~/lib/fullcalendar/daygrid/main.js"></script>
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+
+        <script>
+
+            document.addEventListener('DOMContentLoaded', function () {
+                var eventsArray = [];
+                $.ajax({
+                    type: "GET",
+                    url: "?handler=FindAllEvents",
+                    success: function (data) {
+                        eventsArray = data
+                        var calendarEl = document.getElementById('calendar');
+
+                        var calendar = new FullCalendar.Calendar(calendarEl, {
+                            plugins: ['dayGrid'],
+                            events: eventsArray
+                        });
+                        calendar.render();
+                        console.log(eventsArray);
+                        console.log(data);
+                    }
+                })
+                
+            });
+        </script>
+    </head>
+<h1>Events</h1>
 
 <p>
     <a asp-page="Create">Create New</a>
@@ -18,32 +50,47 @@
                 @Html.DisplayNameFor(model => model.Event[0].Title)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Event[0].Date)
+                @Html.DisplayNameFor(model => model.Event[0].Description)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Event[0].Location)
+                @Html.DisplayNameFor(model => model.Event[0].Start)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Event[0].End)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Event[0].AllDay)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Event) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Date)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Location)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.EventId">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.EventId">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.EventId">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model.Event)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Start)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.End)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AllDay)
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.EventId">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@item.EventId">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.EventId">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+<div id="calendar"></div>
