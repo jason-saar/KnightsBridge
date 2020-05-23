@@ -36,6 +36,7 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\lib\fullcalendar\" />
+    <Folder Include="wwwroot\Upload\" />
   </ItemGroup>
 
 </Project>
