@@ -1,0 +1,19 @@
+﻿@page
+@model KnightsBridge.Pages.Resources.IndexModel
+@{
+	ViewData["Title"] = "Index";
+	Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+
+<div class="text-center">
+	<h1 id="home-header" class="display-4 font-weight-bold">Resources</h1>
+	@if (Model.Uploads != null)
+	{
+		@foreach (System.IO.FileInfo file in Model.Uploads)
+		{
+			<a href="~/Downloads/@file.Name">@file.Name</a>
+		}
+	}
+</div>
+

@@ -35,8 +35,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Pages\Resources\Uploads\" />
     <Folder Include="wwwroot\lib\fullcalendar\" />
-    <Folder Include="wwwroot\Upload\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\Downloads\Knights_Bridge_By_laws.pdf" />
   </ItemGroup>
 
 </Project>

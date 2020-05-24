@@ -6,10 +6,13 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">
-        The file name is <br />
-        @Model.FileName
-    </h1>
+    @if (Model.FileName != "Not Available")
+	{
+        <h1 class="display-4">@Model.FileName successfully uploaded.</h1>
+	} else
+	{
+        <h1 class="display-4">Upload a file</h1>
+	}
 
     <form method="post" enctype="multipart/form-data">
         <input type="file" asp-for="Upload"/>

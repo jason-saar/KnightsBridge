@@ -30,8 +30,10 @@ namespace KnightsBridge.Pages.Resources
         public IFormFile Upload { get; set; }
         public async Task OnPostAsync()
         {
-            var file = Path.Combine(_hostEnvironment.WebRootPath, "App_data", Upload.FileName);
-            Directory.CreateDirectory(Path.Combine(_hostEnvironment.WebRootPath, "App_data"));
+            string currentDir = _hostEnvironment.WebRootPath;
+            var file = Path.Combine(currentDir, "Downloads", Upload.FileName);
+            file = file.Replace(" ", "_");
+            Directory.CreateDirectory(Path.Combine(currentDir, "Downloads"));
             using (var fileStream = new FileStream(file, FileMode.Create))
             {
                 await Upload.CopyToAsync(fileStream);
