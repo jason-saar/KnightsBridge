@@ -32,6 +32,7 @@ namespace KnightsBridge
                 options.UseSqlServer(
                     Configuration.GetConnectionString("KnightsBridgeContextConnection")));
             services.AddDefaultIdentity<KnightsBridgeUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<KnightsBridgeContext>();
             services.AddControllersWithViews();
             services.AddRazorPages();
@@ -44,7 +45,7 @@ namespace KnightsBridge
             );
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider services)
         {
             if (env.IsDevelopment())
             {
@@ -71,6 +72,29 @@ namespace KnightsBridge
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
+
+            CreateRoles(services).Wait();
+        }
+
+        private async Task CreateRoles(IServiceProvider serviceProvider)
+        {
+            var RoleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+            var UserManager = serviceProvider.GetRequiredService<UserManager<KnightsBridgeUser>>();
+
+            IdentityResult roleResult;
+            //here in this line we are adding Admin Role
+            var roleCheck = await RoleManager.RoleExistsAsync("Admin");
+            if (!roleCheck)
+            {
+                //here in this line we are creating admin role and seed it to the database
+                roleResult = await RoleManager.CreateAsync(new IdentityRole("Admin"));
+            }
+            //here we are assigning the Admin role to the User that we have registered above 
+            //Now, we are assinging admin role to this user("Ali@gmail.com"). When will we run this project then it will
+            //be assigned to that user.
+            KnightsBridgeUser user = await UserManager.FindByEmailAsync("admin@fmail.com");
+            var User = new KnightsBridgeUser();
+            await UserManager.AddToRoleAsync(user, "Admin");
         }
     }
 }
