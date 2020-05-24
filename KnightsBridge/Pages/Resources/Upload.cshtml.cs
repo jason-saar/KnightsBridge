@@ -8,9 +8,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Authorization;
 
 namespace KnightsBridge.Pages.Resources
 {
+    [Authorize(Roles = "Admin")]
     public class UploadModel : PageModel
     {
         private IWebHostEnvironment _hostEnvironment;
