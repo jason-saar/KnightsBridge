@@ -1,7 +1,8 @@
 ﻿@page
 @model IndexModel
+@using KnightsBridge.Models; 
 @{
-    ViewData["Title"] = "Home page";
+	ViewData["Title"] = "Home page";
 }
 
 
@@ -15,15 +16,21 @@
     <div class="card-container">
         <div class="row">
             <div class="col-sm-4">
-                <div class="card mx-auto">
-                    <div class="card-body">
-                        <h5 class="card-title text-center">Events</h5>
-                        <div class="card-text">
-                            <h6>Meeting</h6>
-                            <p>March 6 @@ 7:00pm</p>
-                        </div>
-                    </div>
-                </div>
+				<div class="card mx-auto">
+					<div class="card-body">
+						@{
+							List<Event> eventList = Model.Event.ToList();
+                            eventList.Sort((x, y) => DateTime.Compare(x.Start, y.Start));
+							foreach (var e in eventList)
+							{
+							<div class="card-text">
+                                <a asp-page="/Events/Details" asp-route-id="@e.EventId"><h6>@e.Title</h6></a>
+								<p>@e.Start</p>
+							</div>
+							}
+						}
+					</div>
+				</div>
             </div>
             <div class="col-sm-4">
                 <div class="card mx-auto">
@@ -43,9 +50,9 @@
                 <div class="card mx-auto">
                     <div class="card-body">
                         <h5 class="card-title text-center">Community Manager</h5>
-                        <p class="card-text">Our Community Manager is Liz Hunnicutt and she can be reached via the following methods:</p>
+                        <p class="card-text">Our Community Manager is personalname and she can be reached via the following methods:</p>
                         <p class="card-text text-center">Phone: 503.000.000</p>
-                        <p class="card-text text-center">Email: <a href="mailto:LizHunnicut@fmail.com">LizHunnicut@@fmail.com</a></p>
+                        <p class="card-text text-center">Email: <a href="mailto:personalname@fmail.com">peronalname@@fmail.com</a></p>
                     </div>
                 </div>
             </div>

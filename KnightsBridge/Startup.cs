@@ -82,18 +82,15 @@ namespace KnightsBridge
             var UserManager = serviceProvider.GetRequiredService<UserManager<KnightsBridgeUser>>();
 
             IdentityResult roleResult;
-            //here in this line we are adding Admin Role
+            //Add admin role
             var roleCheck = await RoleManager.RoleExistsAsync("Admin");
             if (!roleCheck)
             {
-                //here in this line we are creating admin role and seed it to the database
+                //Create admin role
                 roleResult = await RoleManager.CreateAsync(new IdentityRole("Admin"));
             }
-            //here we are assigning the Admin role to the User that we have registered above 
-            //Now, we are assinging admin role to this user("Ali@gmail.com"). When will we run this project then it will
-            //be assigned to that user.
+            //Assign admin role
             KnightsBridgeUser user = await UserManager.FindByEmailAsync("admin@fmail.com");
-            var User = new KnightsBridgeUser();
             await UserManager.AddToRoleAsync(user, "Admin");
         }
     }
