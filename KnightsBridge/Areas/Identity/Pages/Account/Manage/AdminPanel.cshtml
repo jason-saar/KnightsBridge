@@ -1,0 +1,38 @@
+﻿@page
+@model AdminPanelModel
+@{
+	ViewData["Title"] = "Admin Panel";
+	ViewData["ActivePage"] = ManageNavPages.AdminPanel;
+}
+
+<h4>@ViewData["Title"]</h4>
+
+<div class="row">
+	<div class="col-md-6">
+		<div>
+			<h6>Upload</h6>
+			<form method="post" enctype="multipart/form-data">
+				<input type="file" asp-for="Upload" />
+				<button type="submit">Upload</button>
+			</form>
+			@if (Model.FileName != "Not Available")
+			{
+				<h6>@Model.FileName successfully uploaded.</h6>
+			}
+		</div>
+		<br />
+		<div>
+			<h6>Users</h6>
+			<select class="form-control w-75">
+				@foreach (var user in Model.Users)
+				{
+					<option value="@user.Id">@user.UserName -- @user.FirstName @user.LastName</option>
+				}
+			</select>
+		</div>
+	</div>
+</div>
+
+@section Scripts {
+	<partial name="_ValidationScriptsPartial" />
+}

@@ -35,7 +35,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Pages\Resources\Uploads\" />
     <Folder Include="wwwroot\lib\fullcalendar\" />
   </ItemGroup>
 
