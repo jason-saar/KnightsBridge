@@ -3,6 +3,7 @@
 @{
 	ViewData["Title"] = "Index";
 	Layout = "~/Pages/Shared/_Layout.cshtml";
+
 }
 
 <div class="container">
@@ -13,7 +14,7 @@
 		<ul class="list-unstyled">
 			@foreach (System.IO.FileInfo file in Model.Uploads)
 			{
-				<li><a href="~/Downloads/@file.Name">@file.Name</a></li>
+				<li><a href="~/Downloads/@file.Name">@System.IO.Path.GetFileNameWithoutExtension(file.Name).Replace("_", " ")</a></li>
 			}
 		</ul>
 	}
