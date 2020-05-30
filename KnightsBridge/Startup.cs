@@ -16,6 +16,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using KnightsBridge.Hubs;
 
 namespace KnightsBridge
 {
@@ -40,6 +41,7 @@ namespace KnightsBridge
             services.AddTransient<IEmailSender, EmailSender>();
             services.AddControllersWithViews();
             services.AddRazorPages();
+            services.AddSignalR();
 
             services.Add(
             new ServiceDescriptor(
@@ -75,6 +77,7 @@ namespace KnightsBridge
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
+                endpoints.MapHub<ChatHub>("/chatHub");
             });
 
             CreateRoles(services).Wait();
