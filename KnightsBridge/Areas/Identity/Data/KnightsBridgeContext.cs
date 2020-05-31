@@ -13,6 +13,7 @@ namespace KnightsBridge.Data
     public class KnightsBridgeContext : IdentityDbContext<KnightsBridgeUser>
     {
         public DbSet<Event> Events { get; set; }
+        public DbSet<ChatMsg> Messages { get; set; }
 
         public KnightsBridgeContext(DbContextOptions<KnightsBridgeContext> options)
             : base(options)

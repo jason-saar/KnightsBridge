@@ -1,4 +1,5 @@
 ﻿@page
+@model KnightsBridge.Pages.CommunityModel
 @using Microsoft.AspNetCore.Identity
 @using KnightsBridge.Areas.Identity.Data
 @inject SignInManager<KnightsBridgeUser> SignInManager
@@ -7,14 +8,16 @@
 <div class="container">
 	<div class="row">&nbsp;</div>
 	<div class="row">
-		<div class="col-2">User</div>
 		@if (SignInManager.IsSignedIn(User))
 		{
 			<div class="col-4"><input type="text" id="userInput" value="@UserManager.FindByNameAsync(User.Identity.Name).Result.FirstName" readonly /></div>
 		}
 		else
 		{
-			<div class="col-4"><input type="text" id="userInput" value="Guest" readonly /></div>
+			var rand = new Random();
+			var randNum = rand.Next(1, 100);
+			var guest = "Guest" + randNum;
+			<div class="col-4"><input type="text" id="userInput" value="@guest" readonly /></div>
 		}
 	</div>
 	<div class="row">
@@ -35,8 +38,17 @@
 </div>
 <div class="row">
 	<div class="col-6">
-		<ul id="messagesList"></ul>
+		<ul id="messagesList">
+			@foreach(var msg in Model.Messages)
+			{
+				<li>@msg.User : @msg.Message</li>
+			}
+		</ul>
 	</div>
 </div>
 <script src="~/js/signalr/dist/browser/signalr.js"></script>
 <script src="~/js/chat.js"></script>
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script>
+	$("#userInput").hide();
+</script>
