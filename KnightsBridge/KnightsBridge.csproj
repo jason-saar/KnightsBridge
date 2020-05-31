@@ -9,6 +9,8 @@
     <Compile Remove="Migrations\20200520041533_neweventsadd.Designer.cs" />
     <Compile Remove="Migrations\20200520041641_ajaxeventsadder.cs" />
     <Compile Remove="Migrations\20200520041641_ajaxeventsadder.Designer.cs" />
+    <Compile Remove="Migrations\20200531175750_ChatMessages.cs" />
+    <Compile Remove="Migrations\20200531175750_ChatMessages.Designer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Areas\Identity\Data\Quick access - Shortcut.lnk" />
