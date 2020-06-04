@@ -2,11 +2,10 @@
 @model KnightsBridge.Pages.Resources.IndexModel
 @{
 	ViewData["Title"] = "Index";
-	Layout = "~/Pages/Shared/_Layout.cshtml";
 
 }
 
-<div class="container">
+<div class="container min-vh-100">
 	<div class="text-center">
 	<h1 id="home-header" class="display-4 font-weight-bold">Resources</h1>
 	@if (Model.Uploads != null)
@@ -18,7 +17,7 @@
 			}
 		</ul>
 	}
-</div>
+	</div>
 </div>
 
 
